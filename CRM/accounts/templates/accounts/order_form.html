@@ -1,0 +1,38 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class = "row">
+	<div class = "col-md-12">
+		<div class = "card card-body">
+
+			<form action = "" method = "POST">
+				<!-- {% csrf_token %}
+				{{formset.management_form}}
+				{% for form in formset %}
+					{{form}}
+					<hr>
+				{% endfor %} -->
+
+				<!-- {% csrf_token %}
+				{{form}} -->
+				
+				{% csrf_token %}
+				<table class="table table-sm">
+					<tr>
+						<th>Użytkownik: {{form.customer}}</th>
+						<th>Produkt: {{form.product}}</th>
+						<th>Status: {{form.status}}</th>
+						<th>Nota: {{form.note}}</th>
+					</tr>
+				<table></table>
+				
+
+				<input type = "submit" name = "Submit">
+			</form>
+
+		</div>
+	</div>
+</div>
+
+{% endblock %}

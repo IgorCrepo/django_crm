@@ -1,0 +1,39 @@
+{% load static %}
+
+<style>
+  .hello-msg{
+    font-size: 18px;
+    color: #ffffff;
+    margin-right: 20px
+  }
+  #ustawienia-txt
+  {
+    color: #ffffff;
+  }
+</style>
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark" style = "background-color: #23598b  ;">
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      {% if request.user.is_staff %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">Panel główny</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'products' %}">Produkty</a>
+      </li>
+      {% else %}
+      <li class="nav item">
+        <a id ="ustawienia-txt" class="nav-link" href="{% url 'account' %}">Ustawienia</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+
+  <span class = "hello-msg">Witaj, {{request.user}} </span>
+  <span><a class = "hello-msg" href = "{% url 'logout' %}"> Wyloguj</a></span>
+
+</nav>

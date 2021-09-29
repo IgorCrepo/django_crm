@@ -1,0 +1,93 @@
+{%  extends 'accounts/main.html' %}
+
+{% block content %}
+
+<br>
+
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Customer:</h5>
+            <hr>
+            <a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'account' %}">Zmień dane klienta</a>
+            <a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'create_order' customer.id %}">Złóż zamówienie</a>
+
+        </div>
+    </div>
+
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Dane kontaktowe</h5>
+            <hr>
+            <p>Email: {{customer.email}}</p>
+            <p>Telefon: {{customer.phone}}</p>
+        </div>
+    </div>
+
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Liczba realizacji zamowień</h5>
+            <hr>
+            <h1 style="text-align: center;padding: 10px">{{order_count}}</h1>
+        </div>
+    </div>
+</div>
+
+
+<br>
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+
+            <form method="get">
+              <!-- {{myFilter.form}} -->
+              {% csrf_token %}
+
+              <table class="table table-sm">
+                  <tr>
+                      <th>Produkt: {{myFilter.form.product}}</th>
+                      <th>Status: {{myFilter.form.status}}</th>
+                      <th>Nota zawiera : {{myFilter.form.note}}</th>
+                      <th>Data od : {{myFilter.form.start_date}}</th>
+                      <th>Data do : {{myFilter.form.end_date}}</th>
+                  </tr>
+              <table></table>
+
+                <button class="btn btn-primary" type="submit">Szukaj</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+<br>
+
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <table class="table table-sm">
+                <tr>
+                    <th>Produkt</th>
+                    <th>Nota</th>
+                    <th>Data zamówienia</th>
+                    <th>Status</th>
+                    <th>Aktualizuj</th>
+                    <th>Usuń</th>
+                </tr>
+
+                {% for order in orders %}
+                  <tr>
+                    <td>{{order.product}}</td>
+                    <td>{{order.note}}</td>
+                    <td>{{order.date_created}}</td>
+                    <td>{{order.status}}</td>
+                    <td><a class="btn btn-sm btn-info" href="{% url 'update_order' order.id %}" >Aktualizuj</a></td>
+                    <td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %} ">Usuń</a></td>
+                  </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
